@@ -36,6 +36,8 @@ public class ClubManager {
 	public int remove(int club_no) throws SQLException {
 		return clubDAO.remove(club_no);
 	}
+	
+	/* find 부분 추후 수정 */
 
 	public Club findClub(int club_no)
 		throws SQLException, ClubNotFoundException {
@@ -46,8 +48,6 @@ public class ClubManager {
 		}		
 		return club;
 	}
-	
-	/* find 부분 추후 수정 */
 
 	public List<Club> findClubList() throws SQLException {
 			return clubDAO.findClubList();

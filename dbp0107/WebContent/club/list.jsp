@@ -27,11 +27,29 @@
 			<br>
 			<table style="background-color: #E5DFD2">
 				<tr>
-					<td width="200" align="center" bgcolor="C9BDA2"></td>
+					<td width="200" align="center" bgcolor="C9BDA2">번호</td>
+					<td width="200" align="center" bgcolor="C9BDA2">동아리명</td>
+					<td width="200" align="center" bgcolor="C9BDA2">학과명</td>
 				</tr>
+				<c:forEach var="club" items="${clubList}">
+					<tr>				<!-- 동아리명 클릭시 /club/detail로 넘어감 -->
+						<td width="200" bgcolor="FFFFFF" style="padding-left: 10" height="20">
+				  			${club.club_no}
+						</td>
+						<td width="300" bgcolor="FFFFFF" style="padding-left: 10">
+							<a href="<c:url  value='/club/detail'>
+						    		 <c:param name='club_name' value='${club.club_name}'/>
+						 			 </c:url>">
+							  ${club.club_name}</a>
+						</td>
+						<td width="20" align="center" bgcolor="FFFFFF">
+							${club.dept_name}
+						</td>
+					</tr>	
+				</c:forEach>
 			</table>
-			
-			
+			 <br>   
+			 <a href="<c:url value='/community/create/form' />">커뮤니티 추가</a> 
 		</td>
 	</tr>
 

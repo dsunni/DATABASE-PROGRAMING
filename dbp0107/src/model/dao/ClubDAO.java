@@ -107,7 +107,7 @@ public class ClubDAO {
 	
 	/* DB에 저장된 club 목록들을 불러옴  */
 	public List<Club> clubList() throws SQLException {
-        String sql = "SELECT club_no, club_name, dept_name"
+        String sql = "SELECT club_no, club_name, d.dept_name AS dept_name "
         		   + "FROM CLUB c LEFT OUTER JOIN DEPARTMENT d ON c.department_no = d.department_no "
         		   + "ORDER BY club_no";        
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
