@@ -20,6 +20,12 @@ public class Club {
 	    this.contents = updateClub.contents;
 	}
 	
+	public Club(String club_name, String title) {
+		super();
+		this.club_name = club_name;
+		this.title = title;
+	}
+
 	public Club(int club_no, int department_no, String club_name, String title, String contents, Date createtime) {
 		super();
 		this.club_no = club_no;

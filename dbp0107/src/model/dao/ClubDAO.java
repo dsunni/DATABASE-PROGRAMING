@@ -160,31 +160,30 @@ public class ClubDAO {
 	}
 	
 	
-	/* userID를 기반으로  학과 관련 추천 동아리를 불러옴    Club 도메인 클래스에 저장해서 반환 */
-	public Club showRecommend(int customer_no) {
-		String sql = "SELECT club_name, title, contents, createtime "
-					+ "FROM CLUB c LEFT OUTER JOIN CUSTOMER c1 ON c.deptartment_no = c1.deptartment_no "
-     				+ "WHERE id = ?";              
+	/* userID를 기반으로  학과 관련 추천 동아리를 불러옴    Club 리스트에 저장해서 반환 */
+	public List<Club> showRecommend(int customer_no) throws SQLException {
+        String sql = "SELECT club_name, title "
+		+ "FROM CLUB c LEFT OUTER JOIN CUSTOMER c1 ON c.department_no = c1.department_no "
+     		+ "WHERE id = ?";                        
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {customer_no});	// JDBCUtil에 query문과 매개 변수 설정
-		Club club = null;
 		
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
-			if(rs.next()) {
-				club = new Club(
-						rs.getInt("club_no"),
-						rs.getInt("deptartment_no"),
-						rs.getString("club_name"),
-						rs.getString("title"),
-						rs.getString("contents"),
-						rs.getDate("createtime"));
-			}
+			List<Club> clubList = new ArrayList<Club>();	// member들의 리스트 생성
+			while (rs.next()) {
+				Club club = new Club(			// User 객체를 생성하여 현재 행의 정보를 저장
+					rs.getString("club_name"),
+					rs.getString("title"));
+				clubList.add(club);			// List에 Community 객체 저장
+			}		
+			return clubList;					
+				
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.close();		// resource 반환
 		}
-		return club;
+		return null;
 	}
 	
 	public boolean existingClub(int club_no) throws SQLException {

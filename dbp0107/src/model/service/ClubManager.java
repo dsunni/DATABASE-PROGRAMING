@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Club;
+import model.Customer;
 import model.dao.ClubDAO;
 
 public class ClubManager {
@@ -62,9 +63,23 @@ public class ClubManager {
 		return this.clubDAO;
 	}
 	
-	public Club showRecommend(int customer_no) {
+	public List<Club> showRecommend(int customer_no) throws SQLException{
 		return clubDAO.showRecommend(customer_no);
 	}
+	
+	/*
+		public Community findCommunity(int commId) throws SQLException {
+		Community comm = commDAO.findCommunity(commId); 
+		
+		List<User> memberList = userDAO.findUsersInCommunity(commId);
+		comm.setMemberList(memberList);
+		
+		int numOfMembers = userDAO.getNumberOfUsersInCommunity(commId);
+		comm.setNumOfMembers(numOfMembers);
+		return comm;
+	}
+	
+	*/
 	
 	public Club showDetail(int club_no) {
 		return clubDAO.showDetail(club_no);
