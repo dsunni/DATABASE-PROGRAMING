@@ -31,10 +31,7 @@ public class Customer {
 		this.phone = phone;
 		this.email = email;
 	}
-
 	
-
-
 	public Customer(String customerId, String password, String name, String email) {
 		this.customerId = customerId;
 		this.password = password;

@@ -20,18 +20,9 @@ public class ShowClubRecommendController  implements Controller {
 		
 		String customerId = CustomerSessionUtils.getLoginCustomerId(request.getSession());
 		
-		//int customer_no = getLoginCustomerNo(request.getSession());
-		//int customer_no = CustomerSessionUtils.getLoginCustomerNo(request.getSession());
-		//int customer_no = 9;
-		
-		//HttpSession session = request.getSession();
-		//int customer_no = (int)session.getAttribute("customer_no");
-
 		List<Club> clubList = manager.showRecommend(customerId);
+		request.setAttribute("clubList", clubList);
 		
-		request.setAttribute("clubList", clubList);	
 	    return "/club/recommend.jsp";
 	}
-	
-
 }

@@ -159,25 +159,47 @@ public class ClubDAO {
 		return club;
 	}
 	
-	
-	/* customer_no를 기반으로  학과 관련 추천 동아리를 불러옴    Club 리스트에 저장해서 반환 */
+	/* customerId를 기반으로  학과 관련 추천 동아리를 불러옴    Club 리스트에 저장해서 반환 */
 	public List<Club> showRecommend(String customerId) throws SQLException {
-        String sql = "SELECT club_name, title "
+		// dept_no 기반 학과 관련 추천 동아리 불러오는 sql
+		String sql = "SELECT club_name, title "
         			+ "FROM CLUB c LEFT OUTER JOIN CUSTOMER c1 ON c.department_no = c1.department_no "
-        			+ "WHERE customerId = ?";                        
+        			+ "WHERE customerId = ?"; 
+		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {customerId});	// JDBCUtil에 query문과 매개 변수 설정
+		
+		// dept_no is null이면 random으로 3개 추천 동아리 불러오는 sql
+		String sql2 = "select club_name, title from(select club_name, title from club where department_no is null order by DBMS_RANDOM.value) where rownum < 4";        
 		
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
-			List<Club> clubList = new ArrayList<Club>();	// member들의 리스트 생성
-			while (rs.next()) {
-				Club club = new Club(			// User 객체를 생성하여 현재 행의 정보를 저장
-					rs.getString("club_name"),
-					rs.getString("title"));
-				clubList.add(club);			// List에 Community 객체 저장
-			}		
-			return clubList;					
+			
+			// if dept_no 기반 학과 관련 추천 동아리  존재 O --> using isBeforeFirst()
+			// isBeforeFirst() : 첫 row 바로 앞 O --> TRUE / 첫 row 앞 X or 결과 row가 X --> FALSE
+			if(rs.isBeforeFirst()) {
+				List<Club> clubList = new ArrayList<Club>();	
+				while (rs.next()) {
+					Club club = new Club(			
+						rs.getString("club_name"),
+						rs.getString("title"));
+					clubList.add(club);			
+				}		
+				return clubList;					
+			}
+			// if dept_no 기반 학과 관련 추천 동아리  존재 X
+			else {
+				jdbcUtil.setSqlAndParameters(sql2, null);
+				ResultSet rs2 = jdbcUtil.executeQuery();
 				
+				List<Club> clubList = new ArrayList<Club>();	
+				while (rs2.next()) {
+					Club club = new Club(			
+						rs2.getString("club_name"),
+						rs2.getString("title"));
+					clubList.add(club);			
+				}		
+				return clubList;
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
