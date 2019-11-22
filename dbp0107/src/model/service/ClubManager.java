@@ -51,7 +51,7 @@ public class ClubManager {
 	}
 
 	public List<Club> findClubList() throws SQLException {
-			return clubDAO.findClubList();
+			return clubDAO.clubList();
 	}
 	
 	public List<Club> findClubList(int currentPage, int countPerPage)
@@ -63,8 +63,8 @@ public class ClubManager {
 		return this.clubDAO;
 	}
 	
-	public List<Club> showRecommend(int customer_no) throws SQLException{
-		return clubDAO.showRecommend(customer_no);
+	public List<Club> showRecommend(String customerId) throws SQLException{
+		return clubDAO.showRecommend(customerId);
 	}
 	
 	/*
@@ -82,7 +82,8 @@ public class ClubManager {
 	*/
 	
 	public Club showDetail(int club_no) {
-		return clubDAO.showDetail(club_no);
+		Club club = clubDAO.showDetail(club_no); 
+		return club;
 	}
 	public List<Club> showClubList() throws SQLException {
 		return clubDAO.clubList();

@@ -21,7 +21,7 @@ public class CustomerDAO {
 	 * 사용자 관리 테이블에 새로운 사용자 생성.
 	 */
 	public int create(Customer customer) throws SQLException {
-		String sql = "INSERT INTO USERINFO (customerId, name, password, email, phone) "
+		String sql = "INSERT INTO CUSTOMER (customerId, name, password, email, phone) "
 					+ "VALUES (?, ?, ?, ?, ?)";		
 		Object[] param = new Object[] {customer.getCustomerId(), customer.getPassword(), 
 				customer.getName(), customer.getEmail(), customer.getPhone()};				
@@ -44,7 +44,7 @@ public class CustomerDAO {
 	 * 기존의 사용자 정보를 수정.
 	 */
 	public int update(Customer customer) throws SQLException {
-		String sql = "UPDATE USERINFO "
+		String sql = "UPDATE CUSTOMER "
 					+ "SET password=?, name=?, email=?, phone=? "
 					+ "WHERE customerid=?";
 		Object[] param = new Object[] {customer.getPassword(), customer.getName(), 
@@ -69,7 +69,7 @@ public class CustomerDAO {
 	 * 사용자 ID에 해당하는 사용자를 삭제.
 	 */
 	public int remove(String customerId) throws SQLException {
-		String sql = "DELETE FROM USERINFO WHERE customerid=?";		
+		String sql = "DELETE FROM CUSTOMER WHERE customerid=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {customerId});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
@@ -92,7 +92,7 @@ public class CustomerDAO {
 	 */
 	public Customer findCustomer(String customerId) throws SQLException {
         String sql = "SELECT password, name, email, phone "
-        			+ "FROM USERINFO "
+        			+ "FROM CUSTOMER "
         			+ "WHERE customerid=? ";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {customerId});	// JDBCUtil에 query문과 매개 변수 설정
 
@@ -120,7 +120,7 @@ public class CustomerDAO {
 	 */
 	public List<Customer> findCustomerList() throws SQLException {
         String sql = "SELECT customerId, password, name, email, phone " 
-        		   + "FROM USERINFO "
+        		   + "FROM CUSTOMER "
         		   + "ORDER BY customerId";
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
@@ -152,7 +152,7 @@ public class CustomerDAO {
 	 */
 	public List<Customer> findCustomerList(int currentPage, int countPerPage) throws SQLException {
         String sql = "SELECT customerId, password, name, email, phone " 
-        		   + "FROM USERINFO "
+        		   + "FROM CUSTOMER "
         		   + "ORDER BY customerId";
 		jdbcUtil.setSqlAndParameters(sql, null,					// JDBCUtil에 query문 설정
 				ResultSet.TYPE_SCROLL_INSENSITIVE,				// cursor scroll 가능
@@ -186,7 +186,7 @@ public class CustomerDAO {
 	 * 주어진 사용자 ID에 해당하는 사용자가 존재하는지 검사 
 	 */
 	public boolean existingCustomer(String customerId) throws SQLException {
-		String sql = "SELECT count(*) FROM USERINFO WHERE customerid=?";      
+		String sql = "SELECT count(*) FROM CUSTOMER WHERE customerid=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {customerId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {

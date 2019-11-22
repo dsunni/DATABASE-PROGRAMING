@@ -14,7 +14,6 @@ public class Club {
 	
 	public Club() {	}
 	
-	
 	public void update(Club updateClub) {
 	    this.title = updateClub.title;
 	    this.contents = updateClub.contents;
@@ -24,6 +23,15 @@ public class Club {
 		super();
 		this.club_name = club_name;
 		this.title = title;
+	}
+
+	public Club(String club_name, String dept_name, String title, String contents, Date createtime) {
+		super();
+		this.club_name = club_name;
+		this.dept_name = dept_name;
+		this.title = title;
+		this.contents = contents;
+		this.createtime = createtime;
 	}
 
 	public Club(int club_no, int department_no, String club_name, String title, String contents, Date createtime) {

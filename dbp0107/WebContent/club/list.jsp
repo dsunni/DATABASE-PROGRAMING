@@ -8,7 +8,7 @@
 %> --%>
 <html>
 <head>
-<title>커뮤니티 리스트</title>
+<title>동아리 리스트</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='/css/club.css' />" type="text/css">
 </head>
@@ -37,8 +37,8 @@
 				  			${club.club_no}
 						</td>
 						<td width="300" bgcolor="FFFFFF" style="padding-left: 10">
-							<a href="<c:url  value='/club/detail'>
-						    		 <c:param name='club_name' value='${club.club_name}'/>
+							<a href="<c:url value='/club/detail'>
+						    		 <c:param name='club_no' value='${club.club_no}'/>
 						 			 </c:url>">
 							  ${club.club_name}</a>
 						</td>
@@ -49,7 +49,7 @@
 				</c:forEach>
 			</table>
 			 <br>   
-			 <a href="<c:url value='/community/create/form' />">커뮤니티 추가</a> 
+			 <a href="<c:url value='' />">커뮤니티 추가</a> 
 		</td>
 	</tr>
 

@@ -56,14 +56,11 @@ public class RequestMapping {
 		 * mappings.put("/board/freshmanot/cancel", new CancelController());
 		 */
 		
-		/*
-		 * mappings.put("club/recommend", new ShowClubRecommendController());
-		 * mappings.put("club/list", new ShowClubListController());
-		 * mappings.put("club/detail", new ShowClubDetailController());
-		 * mappings.put("club/search", new searchClubController());
-		 * 
-		 */
-		
+		 mappings.put("/club/recommend", new ShowClubRecommendController());
+		 mappings.put("/club/list", new ShowClubListController());
+		 mappings.put("/club/detail", new ShowClubDetailController());
+		// mappings.put("club/search", new searchClubController());
+
 		/*
 		 * mappings.put("/littlemeeting/list", new ShowLMListController());
 		 * mappings.put("/littlemeeting/detail", new ShowLMDetailController());

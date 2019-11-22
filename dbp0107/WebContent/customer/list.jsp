@@ -67,6 +67,11 @@
 	  </table>	  	 
 	  <br>   
 	  <a href="<c:url value='/customer/register/form' />">사용자 추가</a>
+	  <br>
+ 	  <a href="<c:url value='/club/list' />">동아리 목록</a>
+ 	  <br>	
+ 	  <br>
+ 	  <a href="<c:url value='/club/recommend' />">동아리 추천</a>
 	</td>
   </tr>
 </table>  

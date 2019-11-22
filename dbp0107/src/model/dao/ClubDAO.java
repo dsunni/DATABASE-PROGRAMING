@@ -135,8 +135,9 @@ public class ClubDAO {
 	
 	/* clubNo로 해당 게시글의 상세 내용을 불러옴   Club 도메인 클래스에 저장해서 반환 */
 	public Club showDetail(int club_no) {
-		String sql = "SELECT deptartment_no, club_no, club_name, title, contents, createtime FROM CLUB "
-     				+ "WHERE clubNo = ?";              
+		String sql = "SELECT club_name, NVL2(dept_name, dept_name, '중앙동아리') AS dept_name, title, contents, createtime "
+					+ "FROM CLUB c LEFT OUTER JOIN DEPARTMENT d ON c.department_no = d.department_no "
+     				+ "WHERE club_no = ?";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {club_no});	// JDBCUtil에 query문과 매개 변수 설정
 		Club club = null;
 		
@@ -144,9 +145,8 @@ public class ClubDAO {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
 			if(rs.next()) {
 				club = new Club(
-						rs.getInt("deptartment_no"),
-						club_no,
 						rs.getString("club_name"),
+						rs.getString("dept_name"),
 						rs.getString("title"),
 						rs.getString("contents"),
 						rs.getDate("createtime"));
@@ -160,12 +160,12 @@ public class ClubDAO {
 	}
 	
 	
-	/* userID를 기반으로  학과 관련 추천 동아리를 불러옴    Club 리스트에 저장해서 반환 */
-	public List<Club> showRecommend(int customer_no) throws SQLException {
+	/* customer_no를 기반으로  학과 관련 추천 동아리를 불러옴    Club 리스트에 저장해서 반환 */
+	public List<Club> showRecommend(String customerId) throws SQLException {
         String sql = "SELECT club_name, title "
-		+ "FROM CLUB c LEFT OUTER JOIN CUSTOMER c1 ON c.department_no = c1.department_no "
-     		+ "WHERE id = ?";                        
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {customer_no});	// JDBCUtil에 query문과 매개 변수 설정
+        			+ "FROM CLUB c LEFT OUTER JOIN CUSTOMER c1 ON c.department_no = c1.department_no "
+        			+ "WHERE customerId = ?";                        
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {customerId});	// JDBCUtil에 query문과 매개 변수 설정
 		
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행

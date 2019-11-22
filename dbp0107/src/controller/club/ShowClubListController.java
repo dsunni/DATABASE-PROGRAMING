@@ -13,9 +13,9 @@ public class ShowClubListController implements Controller {
 		// TODO Auto-generated method stub
 		
 		ClubManager manager = ClubManager.getInstance();
-		List<Club> clubList = manager.findClubList();
+		List<Club> clubList = manager.showClubList();
 		
-		// commList 객체를 request에 저장하여 커뮤니티 리스트 화면으로 이동(forwarding)
+		// clubList 객체를 request에 저장하여 club 리스트 화면으로 이동(forwarding)
 		request.setAttribute("clubList", clubList);				
 		return "/club/list.jsp";  
 	}
