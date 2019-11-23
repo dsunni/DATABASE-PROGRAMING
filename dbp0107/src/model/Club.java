@@ -10,6 +10,7 @@ public class Club {
 	private String dept_name;
 	private String title;
 	private String contents;
+	private String customerId;
 	private Date createtime;
 	
 	public Club() {	}
@@ -20,13 +21,11 @@ public class Club {
 	}
 	
 	public Club(String club_name, String title) {
-		super();
 		this.club_name = club_name;
 		this.title = title;
 	}
 
 	public Club(String club_name, String dept_name, String title, String contents, Date createtime) {
-		super();
 		this.club_name = club_name;
 		this.dept_name = dept_name;
 		this.title = title;
@@ -35,7 +34,6 @@ public class Club {
 	}
 
 	public Club(int club_no, int department_no, String club_name, String title, String contents, Date createtime) {
-		super();
 		this.club_no = club_no;
 		this.department_no = department_no;
 		this.club_name = club_name;
@@ -45,21 +43,24 @@ public class Club {
 	}
 
 	public Club(String club_name, String title, String contents, Date createtime) {
-		super();
 		this.club_name = club_name;
 		this.title = title;
 		this.contents = contents;
 		this.createtime = createtime;
 	}
 
-
 	public Club(int club_no, String club_name, String dept_name) {
-		super();
 		this.club_no = club_no;
 		this.club_name = club_name;
 		this.dept_name = dept_name;
 	}
 
+	public Club(String customerId, String club_name, String title, int club_no) {
+		this.customerId = customerId;
+		this.club_name = club_name;
+		this.title = title;
+		this.club_no = club_no;
+	}
 
 	public String getClub_name() {
 		return club_name;
@@ -115,11 +116,17 @@ public class Club {
 		return dept_name;
 	}
 
-
 	public void setDept_name(String dept_name) {
 		this.dept_name = dept_name;
 	}
 
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
 
 	@Override
 	public String toString() {

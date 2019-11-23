@@ -7,10 +7,8 @@ import javax.servlet.http.HttpSession;
 import controller.Controller;
 import controller.customer.CustomerSessionUtils;
 import model.Club;
-import model.Customer;
 import model.service.ClubManager;
-import model.service.CustomerManager;
-import controller.customer.*;
+
 
 public class ShowClubRecommendController  implements Controller {
 	

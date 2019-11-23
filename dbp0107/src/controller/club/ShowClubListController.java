@@ -19,5 +19,4 @@ public class ShowClubListController implements Controller {
 		request.setAttribute("clubList", clubList);				
 		return "/club/list.jsp";  
 	}
-
 }

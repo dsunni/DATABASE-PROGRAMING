@@ -21,7 +21,7 @@
 		<td>
 			<table>
 				<tr>
-					<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;><b>동아리 리스트</b></td>
+					<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;><b> ${customerId}님을 위한 추천 동아리 리스트입니다. </b></td>
 				</tr>
 			</table>
 			<br>
@@ -33,8 +33,12 @@
 				</tr>
 				<c:forEach var="club" items="${clubList}">
 					<tr>				<!-- 동아리명 클릭시 /club/detail로 넘어감 -->
+	
 						<td width="200" bgcolor="FFFFFF" style="padding-left: 10" height="20">
-				  			${club.club_name}
+							<a href="<c:url value='/club/detail'>
+						    		 <c:param name='club_no' value='${club.club_no}'/>
+						 			 </c:url>"> 
+				  			${club.club_name}</a>
 						</td>
 						<td width="20" align="center" bgcolor="FFFFFF">
 							${club.title}
@@ -45,8 +49,7 @@
 			 <br>   
 			 <a href="<c:url value='' />">커뮤니티 추가</a> 
 		</td>
-	</tr>
-
+	</tr>			
 </table>
 </body>
 </html>

@@ -162,14 +162,14 @@ public class ClubDAO {
 	/* customerId를 기반으로  학과 관련 추천 동아리를 불러옴    Club 리스트에 저장해서 반환 */
 	public List<Club> showRecommend(String customerId) throws SQLException {
 		// dept_no 기반 학과 관련 추천 동아리 불러오는 sql
-		String sql = "SELECT club_name, title "
+		String sql = "SELECT club_name, title, club_no "
         			+ "FROM CLUB c LEFT OUTER JOIN CUSTOMER c1 ON c.department_no = c1.department_no "
         			+ "WHERE customerId = ?"; 
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {customerId});	// JDBCUtil에 query문과 매개 변수 설정
 		
 		// dept_no is null이면 random으로 3개 추천 동아리 불러오는 sql
-		String sql2 = "select club_name, title from(select club_name, title from club where department_no is null order by DBMS_RANDOM.value) where rownum < 4";        
+		String sql2 = "select club_name, title, club_no from(select club_name, title, club_no from club where department_no is null order by DBMS_RANDOM.value) where rownum < 4";        
 		
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
@@ -180,8 +180,10 @@ public class ClubDAO {
 				List<Club> clubList = new ArrayList<Club>();	
 				while (rs.next()) {
 					Club club = new Club(			
+						customerId, 
 						rs.getString("club_name"),
-						rs.getString("title"));
+						rs.getString("title"),
+						rs.getInt("club_no"));
 					clubList.add(club);			
 				}		
 				return clubList;					
@@ -193,9 +195,11 @@ public class ClubDAO {
 				
 				List<Club> clubList = new ArrayList<Club>();	
 				while (rs2.next()) {
-					Club club = new Club(			
+					Club club = new Club(	
+						customerId, 
 						rs2.getString("club_name"),
-						rs2.getString("title"));
+						rs2.getString("title"), 
+						rs2.getInt("club_no"));
 					clubList.add(club);			
 				}		
 				return clubList;
