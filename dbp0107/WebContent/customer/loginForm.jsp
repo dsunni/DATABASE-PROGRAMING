@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>사용자 관리(CustomerMan2)</title>
+<title>로그인</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='/css/customer.css' />" type="text/css">
 <script>
@@ -67,7 +67,6 @@ function customerCreate(targetUri) {
 			<input type="button" value="회원가입" onClick="customerCreate('<c:url value='/customer/register/form' />')">
 			</td>						
 		  </tr>
-		  <tr height="40"><td>(관리자 로그인: admin/admin)</td></tr>
 	    </table>
 	  </td>	  
 	</tr>

@@ -16,13 +16,32 @@ public class CustomerDAO {
 	public CustomerDAO() {			
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
-		
-	/**
-	 * 사용자 관리 테이블에 새로운 사용자 생성.
-	 */
+	
 	public int create(Customer customer) throws SQLException {
-		String sql = "INSERT INTO CUSTOMER (customerId, name, password, email, phone) "
-					+ "VALUES (?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO CUSTOMER (customer_no, department_no, customerId, password, name, email, phone) "
+				+ "VALUES (customer_seq.nextval, 1, ?, ?, ?, ?, ?)";		
+		Object[] param = new Object[] {customer.getCustomerId(), customer.getPassword(), 
+				customer.getName(), customer.getEmail(), customer.getPhone()};				
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 d설정
+						
+		try {				
+			int result = jdbcUtil.executeUpdate();	// insert 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {		
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;			
+	}
+	
+	/*
+
+	public int create(Customer customer) throws SQLException {
+		String sql = "INSERT INTO CUSTOMER (customer_no, customerId, password, name, email, phone) "
+					+ "VALUES (1, ?, ?, ?, ?, ?)";		
 		Object[] param = new Object[] {customer.getCustomerId(), customer.getPassword(), 
 				customer.getName(), customer.getEmail(), customer.getPhone()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
@@ -39,7 +58,7 @@ public class CustomerDAO {
 		}		
 		return 0;			
 	}
-
+*/
 	/**
 	 * 기존의 사용자 정보를 수정.
 	 */
