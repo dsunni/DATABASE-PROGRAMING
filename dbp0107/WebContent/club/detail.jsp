@@ -1,46 +1,55 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- <%@include file = "/main_banner.jsp"%>  --%>
 <html>
 <head>
 <title>동아리 세부정보</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel=stylesheet href="<c:url value='/css/club.css' />" type="text/css">
-<style>
-.commTable {
-  color: blue;
-  background: YellowGreen;
-}
-.commHead {
-  width: 120px;
-  height: 22px;
-  text-align: center;
-  background: "E6ECDE";  
-}
-.commCell {
-  width: 470px;
-  text-align: left;
-  padding-left: 10px;
-  background: "FFFFFF";  
-}
-</style>
-<script>
-function clubRemove() {
-	return confirm("정말 삭제하시겠습니까?");		
-}
-</script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel=stylesheet href="<c:url value='/css/customer.css' />" type="text/css">
 </head>
+
+
+<header class="masthead">
+  <div class="container h-50">
+    <div class="row h-100 align-items-center">
+      <div class="col-12 text-center">
+        <h1 class="font-weight-light">동아리 관련 정보입니다.</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
   <br>
-  <table style="width:100%">
+  
+  <dl class="row" style="margin-left:10%">
+	  <dt class="col-sm-3">동아리명</dt>
+	  <dd class="col-sm-9">${club.club_name}</dd>
+	
+	  <dt class="col-sm-3">학과명</dt>
+	  <dd class="col-sm-9">${club.dept_name}</dd>
+	  	
+	  <dt class="col-sm-3">제목</dt>
+	  <dd class="col-sm-9">${club.title}</dd>
+	  	
+	  <dt class="col-sm-3">내용</dt>
+	  <dd class="col-sm-9">${club.contents}</dd>
+	  	  	
+	  <dt class="col-sm-3">개설일자</dt>
+	  <dd class="col-sm-9">${club.createtime} </dd>
+  </dl>
+  
+  
+  
+  <%-- <table class="table table-bordered" style="margin-left:10%; width:85%">
     <tr>
 	  <td width="20"></td>
-	  <td>
-	    <table>
-		  <tr>	<!-- String club_name, String dept_name, String title, String contents, Date createtime  -->
-			<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>동아리 상세 정보</b>&nbsp;&nbsp;</td>
-		  </tr>
-	    </table>  
+	  <td> 
 	    <br>	  	    
 	  	<table class="clubTable">
 	  	  <tr>
@@ -77,12 +86,9 @@ function clubRemove() {
  	    <a href="<c:url value='/club/list' />">동아리 목록</a>
  	    <br>	   
  	    
- 	    <!-- 수정이 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
-        <c:if test="${updateFailed}">
-	      <font color="red"><c:out value="${exception.getMessage()}" /></font>
-	    </c:if>    
+
 	  </td>
 	</tr>
-  </table>  
+  </table>  --%> 
 </body>
 </html>
